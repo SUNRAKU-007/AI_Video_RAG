@@ -1,0 +1,51 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+.venv/
+.venv*/
+.venv311/
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Generated application data
+downloads/
+input/
+vector_db/
+model_cache/
+
+# Media files
+*.wav
+*.mp3
+*.mp4
+*.m4a
+*.mkv
+*.webm
+*.mov
+*.avi
+*.flac
+*.ogg
+*.aac
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.bak
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,55 @@
+services:
+
+  ai-video-assistant:
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: ai-video-assistant
+
+    ports:
+      - "8501:8501"
+
+    env_file:
+      - .env
+
+    environment:
+
+      # Application directories
+      CHROMA_DIR: /app/vector_db
+      AUDIO_WORK_DIR: /app/downloads
+
+      # Hugging Face cache
+      HF_HOME: /app/model_cache/huggingface
+      TORCH_HOME: /app/model_cache/torch
+      XDG_CACHE_HOME: /app/model_cache
+
+      # CPU configuration
+      EMBEDDING_DEVICE: cpu
+      WHISPER_DEVICE: cpu
+      WHISPER_COMPUTE_TYPE: int8
+
+      # Streamlit
+      STREAMLIT_SERVER_HEADLESS: "true"
+
+      # Python
+      PYTHONUNBUFFERED: "1"
+
+    volumes:
+
+      # Temporary audio files
+      - ./downloads:/app/downloads
+
+      # Persistent Chroma database
+      - ./vector_db:/app/vector_db
+
+      # Cached AI models
+      - ./model_cache:/app/model_cache
+
+      # Local videos available inside the container
+      - ./input:/app/input:ro
+
+    restart: unless-stopped
+
+    init: true
